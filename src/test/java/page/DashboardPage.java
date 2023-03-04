@@ -1,2 +1,4 @@
-package page;public class DashboardPage {
+package page;
+
+public class DashboardPage {
 }
