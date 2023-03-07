@@ -2,7 +2,6 @@ package page;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.netology.data.DataHelper;
 
 import java.time.Duration;
 
@@ -11,8 +10,7 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class CreditPage extends TourPage {
-
+public class CardPage extends TourPage {
     private final ElementsCollection fields = $$(".input__control");
     private final SelenideElement cardNumberField = $("[placeholder='0000 0000 0000 0000']");
     private final SelenideElement expirationMonthField = $("[placeholder='08']");
@@ -28,7 +26,7 @@ public class CreditPage extends TourPage {
     private final SelenideElement expiredYearError = $(withText("Истёк срок действия карты"));
     private final SelenideElement invalidDateError = $(withText("Неверно указан срок действия карты"));
 
-    public void enterCreditCardData(DataHelper.CardInformation cardInformation) {
+    public void enterCardData(ru.netology.data.DataHelper.CardInformation cardInformation) {
         cardNumberField.setValue(cardInformation.getCardNumber());
         expirationMonthField.setValue(cardInformation.getMonth());
         expirationYearField.setValue(cardInformation.getYear());
@@ -37,23 +35,23 @@ public class CreditPage extends TourPage {
         continueButton.click();
     }
 
-    public void successfulCreditCardPayment() {
+    public void successfulCardPayment() {
         successNotification.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public void notSuccessfulCreditCardPayment() {
+    public void notSuccessfulCardPayment() {
         errorNotification.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public void invalidCreditFormat() {
+    public void invalidCardFormat() {
         invalidFormatError.shouldBe(visible);
     }
 
-    public void requiredCreditToFillIn() {
+    public void requiredCardToFillIn() {
         requiredToFillIn.shouldBe(visible);
     }
 
-    public void expiredCreditCardYear() {
+    public void expiredCardYear() {
         expiredYearError.shouldBe(visible);
     }
 

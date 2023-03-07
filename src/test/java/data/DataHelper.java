@@ -1,68 +1,193 @@
-package data;
+package ru.netology.data;
 
 import com.github.javafaker.Faker;
-import lombok.Data;
+import data.CardNumber;
+import data.DataGenerator;
 import lombok.Value;
 
-import java.util.Random;
+import java.util.Locale;
 
 public class DataHelper {
-    private DataHelper(){
+    static Faker enOption = new Faker(new Locale("en"));
+    static Faker faker = new Faker(new Locale("ru"));
+    static DataGenerator dataGenerator = new DataGenerator();
+    static CardNumber cardNumber = new CardNumber();
 
+    public static CardInformation getValidCard() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(1).getYear(),
+                dataGenerator.shiftMonth(1).getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
     }
 
-    private static String getCardNumber(String card){
-        switch (card.toLowerCase()){
-            case ("approved"):
-                return "4444 4444 4444 4441";
-
-            case ("rejected"):
-                return "4444 4444 4444 4442";
-
-            default:
-                return "4444 4444 4444 4444";
-        }
+    public static CardInformation getCurrentMonthAndYear() {
+        return new CardInformation(cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(0).getYear(),
+                dataGenerator.shiftMonth(0).getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
     }
 
-    private static String getFullName(){
-        return new Faker().name().firstName().toUpperCase() + "" + new Faker().name().firstName().toUpperCase();
+    public static CardInformation getDeclinedCard() {
+        return new CardInformation(
+                cardNumber.getDeclinedCardNumber(),
+                dataGenerator.shiftYear(1).getYear(),
+                dataGenerator.shiftMonth(1).getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
     }
 
-    private static String getCvc(){
-        Random Cvv = new Random();
-        return String.valueOf(Cvv.nextInt(10)) + Cvv.nextInt(10 ) + Cvv.nextInt(10);
-
+    public static CardInformation getAllFieldsEmpty() {
+        return new CardInformation(
+                " ",
+                " ",
+                " ",
+                " ",
+                " ");
     }
+
+    public static CardInformation getCardNumberEmpty() {
+        return new CardInformation(
+                " ",
+                dataGenerator.shiftYear(1).getYear(),
+                dataGenerator.shiftMonth(1).getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getYearEmpty() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                " ",
+                dataGenerator.shiftMonth(1).getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getMonthEmpty() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(2).getYear(),
+                " ",
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getHolderEmpty() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(2).getYear(),
+                dataGenerator.shiftMonth(2).getMonth(),
+                " ",
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getCVVEmpty() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(3).getYear(),
+                dataGenerator.shiftMonth(2).getMonth(),
+                enOption.name().fullName(),
+                "");
+    }
+
+    public static CardInformation getExpiredYear() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(-1).getYear(),
+                dataGenerator.shiftMonth(0).getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getExpiredMonth() {
+        return new CardInformation(cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(0).getYear(),
+                dataGenerator.shiftMonth(-1).getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getInvalidNumber() {
+        return new CardInformation(
+                cardNumber.getInvalidCardNumber(),
+                dataGenerator.shiftYear(1).getYear(),
+                dataGenerator.shiftMonth(2).getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getWrongYear() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.wrongYear().getYear(),
+                dataGenerator.shiftMonth(2).getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getWrongMonth() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(3).getYear(),
+                dataGenerator.wrongMonth().getMonth(),
+                enOption.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getNumericName() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(5).getYear(),
+                dataGenerator.shiftMonth(2).getMonth(),
+                Integer.toString(enOption.number().numberBetween(1, 999)),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getInvalidCVV() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(5).getYear(),
+                dataGenerator.shiftMonth(2).getMonth(),
+                faker.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(0, 99)));
+    }
+
+    public static CardInformation getZeroCard() {
+        return new CardInformation(
+                "0000000000000000",
+                dataGenerator.shiftYear(5).getYear(),
+                dataGenerator.shiftMonth(2).getMonth(),
+                faker.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getZeroMonth() {
+        return new CardInformation(
+                "0000000000000000",
+                dataGenerator.shiftYear(0).getYear(),
+                "00",
+                faker.name().fullName(),
+                Integer.toString(enOption.number().numberBetween(100, 999)));
+    }
+
+    public static CardInformation getZeroCVV() {
+        return new CardInformation(
+                cardNumber.getApprovedCardNumber(),
+                dataGenerator.shiftYear(5).getYear(),
+                dataGenerator.shiftMonth(2).getMonth(),
+                faker.name().fullName(),
+                "000");
+    }
+
     @Value
-    public static class  RequiredFields {
-        String cardNumber;
-        String month;
-        String year;
-        String owner;
-        String cvc;
-    }
-    public static RequiredFields getValidApproved(){
-        return new RequiredFields(getCardNumber("APPROVED"), "12","26", getFullName(),getCvc());
-    }
-    public static RequiredFields getValidDeclinedFields() {
-        return new RequiredFields(getCardNumber("DECLINED"), "12", "26", getFullName(), getCvc());
-    }
-    public static RequiredFields getInvalidOwnerFields() {
-        return new RequiredFields(getCardNumber("APPROVED"), "12", "26", "ъ", getCvc());
-    }
-    public static RequiredFields getInvalidCardFields() {
-        return new RequiredFields(getCardNumber("INVALID"), "12", "26", getFullName(), getCvc());
-    }
-
-    @Data
-    public class Fields {
-        private String id;
-        private int amount;
-        private String status;
-        private String created;
-        private String bank_id;
-        private String credit_id;
-        private String payment_id;
-        private String transaction_id;
+    public static class CardInformation {
+        private String cardNumber;
+        private String year;
+        private String month;
+        private String holder;
+        private String CVV;
     }
 }
