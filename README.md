@@ -7,7 +7,8 @@
         * cd ```Diploma```
     * запустить docker container (настройки в файле docker-compose.yml)
         * ```docker-compose up```
-* в терминале IntelliJ IDEA запустить SUT:
+______
+* запустить SUT:
     -  БД `MySQL` командой
   
       java "-Dspring.datasource.url=jdbc:mysql://185.119.57.47:3306/app" -jar artifacts/aqa-shop.jar
@@ -16,12 +17,14 @@
   
       java "-Dspring.datasource.url=jdbc:postgresql://185.119.57.47:5432/app" -jar artifacts/aqa-shop.jar
   
-* в терминале IntelliJ IDEA запустить автотесты командой:
+___________
+* запустить автотесты командой:
     - для конфигурации БД `MySql`: 
   
       ```./gradlew clean test "-Ddb.url=jdbc:mysql://185.119.57.47:3306/app"```
     - для конфигурации БД PostgreSQL:  
       ```./gradlew clean test "-Ddb.url=jdbc:postgresql://185.119.57.47:5432/app"```
-* в терминале IntelliJ IDEA запустить отчеты командой:
+___________
+* запустить отчеты командой:
     - ```./gradlew allureReport (первоначальная команда)```
     - ```./gradlew allureServe (запуск и открытие отчетов)```
