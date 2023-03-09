@@ -6,14 +6,6 @@ const data = JSON.parse(fs.readFileSync('data.json', 'UTF-8'));
 console.log(data);
 
 const server = express();
-const fs = require('fs');
-const express = require('express');
-const uuidv4 = require('uuid/v4');
-
-const data = JSON.parse(fs.readFileSync('data.json', 'UTF-8'));
-console.log(data);
-
-const server = express();
 server.use(express.json());
 
 server.post(['/payment', '/credit'], (req, res) => {
