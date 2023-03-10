@@ -11,17 +11,17 @@ ______
 * запустить SUT:
     -  БД `MySQL` командой
   
-       java -jar artifacts/aqa-shop.jar -spring.datasource.url=jdbc:mysql://localhost:3306/app
+       java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:mysql://localhost:3306/app
 
     -  БД `PostgreSQL` командой
   
-      java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:postgresql://localhost:3306/app
+      java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app
   
 ___________
 * запустить автотесты командой:
     - для конфигурации БД `MySql`: 
   
-      ```./gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app""```
+      ```./gradlew clean test "-Ddb.url=jdbc:mysql://localhost:3306/app"```
     - для конфигурации БД PostgreSQL:  
       ```./gradlew clean test "-Ddb.url=jdbc:postgresql://localhost:5432/app"```
 ___________
