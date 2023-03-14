@@ -27,7 +27,7 @@ public class PositiveTest {
         open("http://localhost:8080/");
     }
 
-    @DisplayName("Successful purchase.")
+    @DisplayName("Successful card purchase.")
     @Test
     public void shouldConfirmPaymentApprovedCard() {
         var tourPage = new TourPage();
@@ -55,4 +55,3 @@ public class PositiveTest {
         Assertions.assertEquals("APPROVED", statusPayment);
     }
 }
-
