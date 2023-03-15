@@ -16,15 +16,25 @@ repositories {
     mavenCentral()
 }
 
+allure {
+    version = '2.19.0'
+    useJUnit5 {
+        version = '2.19.0'
+    }
+}
+
 dependencies {
     implementation 'mysql:mysql-connector-java:8.0.26'
     implementation 'org.postgresql:postgresql:42.2.23'
     implementation 'commons-dbutils:commons-dbutils:1.7'
+    implementation 'io.qameta.allure:allure-java-commons:2.19.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testImplementation 'com.codeborne:selenide:5.23.2'
     testImplementation 'org.slf4j:slf4j-nop:1.7.32'
     testImplementation 'io.qameta.allure:allure-selenide:2.19.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.19.0'
+
 }
 
 test {
