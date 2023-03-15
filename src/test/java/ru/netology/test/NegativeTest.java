@@ -26,6 +26,7 @@ public class NegativeTest {
         open("http://localhost:8080/");
     }
 
+    ///////////Test Card/////////////
     @DisplayName("Card - Declined card.")
     @Test
     public void shouldNotPayDeclinedCard() {
@@ -40,17 +41,132 @@ public class NegativeTest {
         Assertions.assertEquals("DECLINED", statusPayment);
     }
 
-    @DisplayName("Credit - Declined card.")
+    @DisplayName("Card - All blank data.")
     @Test
-    public void shouldNotCreditDeclinedCard() {
+    public void shouldNotPayEmptyForm() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var emptyCardInformation = DataHelper.getAllFieldsEmpty();
+        payCard.enterCardData(emptyCardInformation);
+        payCard.invalidCardFormat();
+    }
+
+    @DisplayName("Card - Empty field card number.")
+    @Test
+    public void shouldNotPayEmptyCard() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var fieldCardEmpty = DataHelper.getCardNumberEmpty();
+        payCard.enterCardData(fieldCardEmpty);
+        payCard.invalidCardFormat();
+    }
+
+    @DisplayName("Card - Empty field Year.")
+    @Test
+    public void shouldNotPayEmptyYear() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var fieldYearEmpty = DataHelper.getYearEmpty();
+        payCard.enterCardData(fieldYearEmpty);
+        payCard.invalidCardFormat();
+    }
+
+    @DisplayName("Card - Empty field Month.")
+    @Test
+    public void shouldNotPayEmptyMonth() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var fieldMonthEmpty = DataHelper.getMonthEmpty();
+        payCard.enterCardData(fieldMonthEmpty);
+        payCard.invalidCardFormat();
+    }
+
+    @DisplayName("Card - Empty field Holder")
+    @Test
+    public void shouldNotPayEmptyHolder() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var fieldHolderEmpty = DataHelper.getHolderEmpty();
+        payCard.enterCardData(fieldHolderEmpty);
+        payCard.requiredCardToFillIn();
+    }
+
+    @DisplayName("Card - Empty field CVV.")
+    @Test
+    public void shouldNotPayEmptyCvv() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var fieldCvvEmpty = DataHelper.getCVVEmpty();
+        payCard.enterCardData(fieldCvvEmpty);
+        payCard.invalidCardFormat();
+    }
+
+
+
+
+    ///////////Test Credit/////////////
+    @DisplayName("Credit - All blank data.")
+    @Test
+    public void shouldNotCreditEmptyForm() {
         var tourPage = new TourPage();
         var buyCredit = tourPage.buyCredit();
-        var declinedCard = DataHelper.getDeclinedCard();
-        buyCredit.enterCreditCardData(declinedCard);
-        buyCredit.notSuccessfulCreditCardPayment();
-
-        var paymentId = SQLHelper.getPaymentId();
-        var statusPayment = SQLHelper.getStatusCredit(paymentId);
-        Assertions.assertEquals("DECLINED", statusPayment);
+        var emptyCardInformation = DataHelper.getAllFieldsEmpty();
+        buyCredit.enterCreditCardData(emptyCardInformation);
+        buyCredit.invalidCreditFormat();
     }
+    @DisplayName("Credit - Empty field card number.")
+    @Test
+    public void shouldNotCreditEmptyCard() {
+        var tourPage = new TourPage();
+        var buyCredit = tourPage.buyCredit();
+        var fieldCardEmpty = DataHelper.getCardNumberEmpty();
+        buyCredit.enterCreditCardData(fieldCardEmpty);
+        buyCredit.invalidCreditFormat();
+    }
+    @DisplayName("Credit - Empty field Year.")
+    @Test
+    public void shouldNotCreditEmptyYear() {
+        var tourPage = new TourPage();
+        var buyCredit = tourPage.buyCredit();
+        var fieldYearEmpty = DataHelper.getYearEmpty();
+        buyCredit.enterCreditCardData(fieldYearEmpty);
+        buyCredit.invalidCreditFormat();
+    }
+    @DisplayName("Credit - Empty field Month.")
+    @Test
+    public void shouldNotCreditEmptyMonth() {
+        var tourPage = new TourPage();
+        var buyCredit = tourPage.buyCredit();
+        var fieldMonthEmpty = DataHelper.getMonthEmpty();
+        buyCredit.enterCreditCardData(fieldMonthEmpty);
+        buyCredit.invalidCreditFormat();
+    }
+    @DisplayName("Credit - Empty field Holder")
+    @Test
+    public void shouldNotCreditEmptyHolder() {
+        var tourPage = new TourPage();
+        var buyCredit = tourPage.buyCredit();
+        var fieldHolderEmpty = DataHelper.getHolderEmpty();
+        buyCredit.enterCreditCardData(fieldHolderEmpty);
+        buyCredit.requiredCreditToFillIn();
+    }
+    @DisplayName("Credit - Empty field CVV.")
+    @Test
+    public void shouldNotCreditEmptyCvv() {
+        var tourPage = new TourPage();
+        var buyCredit = tourPage.buyCredit();
+        var fieldCvvEmpty = DataHelper.getCVVEmpty();
+        buyCredit.enterCreditCardData(fieldCvvEmpty);
+        buyCredit.invalidCreditFormat();
+    }
+    @DisplayName("Card - Invalid card number.")
+    @Test
+    public void shouldNotPayInvalidNumber() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var invalidCard = DataHelper.getInvalidNumber();
+        payCard.enterCardData(invalidCard);
+        payCard.invalidCardFormat();
+    }
+
 }

@@ -7,7 +7,6 @@ import ru.netology.data.DataHelper;
 import ru.netology.data.SQLHelper;
 import ru.netology.page.TourPage;
 
-import java.sql.SQLData;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -26,7 +25,7 @@ public class PositiveTest {
     public void openChrome() {
         open("http://localhost:8080/");
     }
-
+    ///////////Test Card/////////////
     @DisplayName("Successful card purchase.")
     @Test
     public void shouldConfirmPaymentApprovedCard() {
@@ -41,6 +40,21 @@ public class PositiveTest {
         Assertions.assertEquals("APPROVED", statusPayment);
     }
 
+    @DisplayName("Successful card purchase with current M and Y.")
+    @Test
+    public void shouldConfirmPaymentCurrentMonthAndYear() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var validCardInformation = DataHelper.getCurrentMonthAndYear();
+        payCard.enterCardData(validCardInformation);
+        payCard.successfulCardPayment();
+
+        var paymentId = SQLHelper.getPaymentId();
+        var statusPayment = SQLHelper.getStatusPayment(paymentId);
+        Assertions.assertEquals("APPROVED", statusPayment);
+    }
+
+    ///////////Test Credit/////////////
     @DisplayName("Successful credit purchase")
     @Test
     public void shouldConfirmCreditApprovedCard() {
@@ -54,4 +68,23 @@ public class PositiveTest {
         var statusPayment = SQLHelper.getStatusCredit(paymentId);
         Assertions.assertEquals("APPROVED", statusPayment);
     }
+
+    @DisplayName("Successful credit purchase with current M and Y.")
+    @Test
+    public void shouldConfirmCreditWithCurrentMonthAndYear() {
+        var tourPage = new TourPage();
+        var buyCredit = tourPage.buyCredit();
+        var validCardInformation = DataHelper.getCurrentMonthAndYear();
+        buyCredit.enterCreditCardData(validCardInformation);
+        buyCredit.successfulCreditCardPayment();
+
+        var paymentId = SQLHelper.getPaymentId();
+        var statusPayment = SQLHelper.getStatusCredit(paymentId);
+        Assertions.assertEquals("APPROVED", statusPayment);
+    }
+
+
+
+
+
 }

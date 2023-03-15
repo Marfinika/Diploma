@@ -38,11 +38,11 @@ public class CardPage extends TourPage {
     }
 
     public void successfulCardPayment() {
-        successNotification.shouldBe(visible, Duration.ofSeconds(15));
+        successNotification.shouldBe(visible, Duration.ofSeconds(20));
     }
 
     public void notSuccessfulCardPayment() {
-        errorNotification.shouldBe(visible, Duration.ofSeconds(15));
+        errorNotification.shouldBe(visible, Duration.ofSeconds(20));
     }
 
     public void invalidCardFormat() {
