@@ -101,7 +101,25 @@ public class NegativeTest {
         payCard.invalidCardFormat();
     }
 
+    @DisplayName("Card - Zero month.")
+    @Test
+    public void shouldNotPayZeroMonth() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var invalidCard = DataHelper.getZeroMonth();
+        payCard.enterCardData(invalidCard);
+        payCard.invalidDate();
+    }
 
+    @DisplayName("Card - Zero CVV")
+    @Test
+    public void shouldNotPayZeroCVV() {
+        var tourPage = new TourPage();
+        var payCard = tourPage.payCard();
+        var invalidCard = DataHelper.getZeroCVV();
+        payCard.enterCardData(invalidCard);
+        payCard.invalidCardFormat();
+    }
 
 
     ///////////Test Credit/////////////
@@ -114,6 +132,7 @@ public class NegativeTest {
         buyCredit.enterCreditCardData(emptyCardInformation);
         buyCredit.invalidCreditFormat();
     }
+
     @DisplayName("Credit - Empty field card number.")
     @Test
     public void shouldNotCreditEmptyCard() {
@@ -123,6 +142,7 @@ public class NegativeTest {
         buyCredit.enterCreditCardData(fieldCardEmpty);
         buyCredit.invalidCreditFormat();
     }
+
     @DisplayName("Credit - Empty field Year.")
     @Test
     public void shouldNotCreditEmptyYear() {
@@ -132,6 +152,7 @@ public class NegativeTest {
         buyCredit.enterCreditCardData(fieldYearEmpty);
         buyCredit.invalidCreditFormat();
     }
+
     @DisplayName("Credit - Empty field Month.")
     @Test
     public void shouldNotCreditEmptyMonth() {
@@ -141,6 +162,7 @@ public class NegativeTest {
         buyCredit.enterCreditCardData(fieldMonthEmpty);
         buyCredit.invalidCreditFormat();
     }
+
     @DisplayName("Credit - Empty field Holder")
     @Test
     public void shouldNotCreditEmptyHolder() {
@@ -150,6 +172,7 @@ public class NegativeTest {
         buyCredit.enterCreditCardData(fieldHolderEmpty);
         buyCredit.requiredCreditToFillIn();
     }
+
     @DisplayName("Credit - Empty field CVV.")
     @Test
     public void shouldNotCreditEmptyCvv() {
@@ -159,6 +182,7 @@ public class NegativeTest {
         buyCredit.enterCreditCardData(fieldCvvEmpty);
         buyCredit.invalidCreditFormat();
     }
+
     @DisplayName("Card - Invalid card number.")
     @Test
     public void shouldNotPayInvalidNumber() {
@@ -169,4 +193,24 @@ public class NegativeTest {
         payCard.invalidCardFormat();
     }
 
+    @DisplayName("Credit- Zero month.")
+    @Test
+    public void shouldNotCreditZeroMonth() {
+        var tourPage = new TourPage();
+        var buyCredit = tourPage.buyCredit();
+        var invalidCard = DataHelper.getZeroMonth();
+        buyCredit.enterCreditCardData(invalidCard);
+        buyCredit.invalidDate();
+
+    }
+
+    @DisplayName("Credit - Zero CVV")
+    @Test
+    public void shouldNotCreditZeroCVV() {
+        var tourPage = new TourPage();
+        var buyCredit = tourPage.buyCredit();
+        var invalidCard = DataHelper.getZeroCVV();
+        buyCredit.enterCreditCardData(invalidCard);
+        buyCredit.invalidCreditFormat();
+    }
 }
