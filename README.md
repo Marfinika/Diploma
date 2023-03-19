@@ -11,11 +11,11 @@ ______
 * запустить SUT:
     -  БД `MySQL` командой
 
-       java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:mysql://localhost:3306/app
+       `java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:mysql://localhost:3306/app`
 
     -  БД `PostgreSQL` командой
 
-      java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app
+      `java -jar artifacts/aqa-shop.jar -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app`
 
 ___________
 * запустить автотесты командой:
@@ -28,4 +28,18 @@ ___________
 * запустить отчеты командой:
     - ```./gradlew allureReport (первоначальная команда)```
     - ```./gradlew allureServe (запуск и открытие отчетов)```
+___________
+
+Документация по проекту.
+
+<code>[Plan](https://github.com/Marfinika/Diploma/blob/master/Documentation/Plan.md)
+</code>
+<code>[Test report](https://github.com/Marfinika/Diploma/blob/master/Documentation/Report.md)
+</code>
+<code>[Test Plan Execution Report](https://github.com/Marfinika/Diploma/blob/master/Documentation/Summary.md)
+</code>
+
+<code>[Bug Report](https://github.com/Marfinika/Diploma/issues)
+</code>
+
 
